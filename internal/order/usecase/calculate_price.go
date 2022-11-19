@@ -1,9 +1,10 @@
 package usecase
 
 import (
-	"github.com/lucas2s/gointensivo/internal/order/Infra/database"
 	"github.com/lucas2s/gointensivo/internal/order/entity"
+	"github.com/lucas2s/gointensivo/internal/order/infra/database"
 
+	// sqlite3
 	_ "github.com/mattn/go-sqlite3"
 )
 

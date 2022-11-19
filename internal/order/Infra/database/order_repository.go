@@ -15,7 +15,7 @@ func NewOrderRepository(db *sql.DB) *OrderRepository {
 }
 
 func (r *OrderRepository) Save(order *entity.Order) error {
-	stmt, err := r.Db.Prepare("INSERT INTO orders (id, price, tax, final_price) VALUES (?, ? , ?, ?)")
+	stmt, err := r.Db.Prepare("INSERT INTO orders (id, price, tax, final_price) VALUES (?, ?, ?, ?)")
 	if err != nil {
 		return err
 	}
@@ -24,4 +24,13 @@ func (r *OrderRepository) Save(order *entity.Order) error {
 		return err
 	}
 	return nil
+}
+
+func (r *OrderRepository) GetTotal() (int, error) {
+	var total int
+	err := r.Db.QueryRow("Select count(*) from orders").Scan(&total)
+	if err != nil {
+		return 0, err
+	}
+	return total, nil
 }
